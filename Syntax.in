@@ -1,0 +1,31 @@
+
+program ::= "VAR" decllist ";" cmpdstmt "."
+
+bigdecllist ::= declaration | structdecl | decl ";" bigdecllist
+
+structdecl::= IDENTIFIER ":" structtype
+structype ::= "STRUCT" decllist "END_STRUCT"
+
+decllist ::= declaration | declaration ";" decllist
+declaration ::= IDENTIFIER ":" type
+
+type ::= "CHAR" | "INTEGER" | "STRUCT"
+arraydecl ::= "ARRAY" "[" size "]" "OF" type
+typedecl ::= arraydecl | type
+
+condition ::= expression RELATION expression
+expression ::= expression "+" term | term
+term ::= term "*" factor | factor
+factor ::= "(" expression ")" | IDENTIFIER
+
+cmpdstmt ::= "BEGIN" stmtlist "END"
+stmtlist ::= stmt | stmt ";" stmtlist
+
+iostmt ::= "READ" | "WRITE" "(" IDENTIFIER ")"
+structstm ::= cmpdstmt | ifstmt | whilestmt
+ifstmt ::= "if" condition "then" stmt ["else" stmt]
+
+simplestmt := assignmstmt | structstmt
+assignmstmt ::= IDENTIFIER ":=" expression
+
+RELATION ::= "<" | "<=" | "=" | "<>" | ">=" | ">"

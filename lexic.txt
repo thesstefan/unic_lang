@@ -1,0 +1,65 @@
+--- Alphabet ---
+
+a. Upper (A-Z) and lower case letters (a-z) of the English alphabet
+b. Underline character '_'
+c. Decimal digits (0-9)
+
+--- Lexic ---
+
+a. Special symbols, representing:
+    - operators:    + - * / := < <= = >=
+    - separators:   [ ] { }  : ; space
+    - reserved words:
+        + ARRAY 
+        + CHAR, INTEGER 
+        + STRUCT, END_STRUCT
+        + DO, IF, ELSE, WHILE
+        + VAR, BEGIN, END
+        + READ, WRITE
+
+b. Identifiers: 
+    - A sequence of letters and digits of at most 255 characters,
+    such that the first character is a letter; the rule is:
+        + identifier ::= letter | letter{letter}{digit}
+        + letter ::= "A" | "B" | ... | "Z"
+        + digit ::= "0" | "1" | ... | "9"
+
+c. Constants
+    1. Integer
+        + noconst := "+"no | "-"no | no
+        + no := digit{no}
+
+    2. Character
+        + character := letter | digit
+
+--- Syntax ---
+
+program ::= "VAR" decllist ";" cmpdstmt "."
+bigdecllist ::= declaration | structdecl | decl ";" bigdecllist
+
+structdecl::= IDENTIFIER ":" structtype
+structype ::= "STRUCT" decllist "END_STRUCT"
+
+decllist ::= declaration | declaration ";" decllist
+declaration ::= IDENTIFIER ":" type
+
+type ::= "CHAR" | "INTEGER" | "STRUCT"
+arraydecl ::= "ARRAY" "[" size "]" "OF" type
+typedecl ::= arraydecl | type
+
+condition ::= expression RELATION expression
+expression ::= expression "+" term | term
+term ::= term "*" factor | factor
+factor ::= "(" expression ")" | IDENTIFIER
+
+cmpdstmt ::= "BEGIN" stmtlist "END"
+stmtlist ::= stmt | stmt ";" stmtlist
+
+iostmt ::= "READ" | "WRITE" "(" IDENTIFIER ")"
+structstm ::= cmpdstmt | ifstmt | whilestmt
+ifstmt ::= "IF" condition "THEN" stmt ["ELSE" stmt]
+
+simplestmt := assignmstmt | structstmt
+assignmstmt ::= IDENTIFIER ":=" expression
+
+RELATION ::= "<" | "<=" | "=" | "<>" | ">=" | ">"
