@@ -1,11 +1,3 @@
---- Alphabet ---
-
-a. Upper (A-Z) and lower case letters (a-z) of the English alphabet
-b. Underline character '_'
-c. Decimal digits (0-9)
-
---- Lexic ---
-
 a. Special symbols, representing:
     - operators:    + - * / := < <= = >=
     - separators:   [ ] { }  : ; space
@@ -31,8 +23,6 @@ c. Constants
 
     2. Character
         + character := letter | digit
-
---- Syntax ---
 
 program ::= "VAR" decllist ";" cmpdstmt "."
 bigdecllist ::= declaration | structdecl | decl ";" bigdecllist
