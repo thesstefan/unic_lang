@@ -1,4 +1,4 @@
-program ::= "VAR" decllist ";" cmpdstmt "."
+program ::= "VAR" bigdecllist ";" cmpdstmt "."
 
 bigdecllist ::= declaration | structdecl | decl ";" bigdecllist
 
