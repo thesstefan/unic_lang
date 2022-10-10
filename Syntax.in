@@ -1,4 +1,3 @@
-
 program ::= "VAR" decllist ";" cmpdstmt "."
 
 bigdecllist ::= declaration | structdecl | decl ";" bigdecllist
