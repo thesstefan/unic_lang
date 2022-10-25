@@ -1,0 +1,123 @@
+\documentclass{article}[12pt]
+\usepackage[cache=false]{minted}
+\usepackage[margin=1in]{geometry}
+\usepackage{tcolorbox}
+
+\title{\textbf{UniC Language Examples}}
+\author{Stefan Stefanache (936/2)}
+\date{}
+
+\begin{document}
+    \maketitle
+
+    \textbf{UniC} provides a small subset of the C language, with a stricter
+    syntax and some new helper functions such as \mintinline{c}{read} and \mintinline{c}{write}.
+
+    \begin{tcolorbox}[
+        standard jigsaw,
+        title=P1. Compute the maximum of 3 numbers,
+        opacityback=0]
+    \begin{minted}{c}
+        int a; read(a);
+        int b; read(b);
+        int c; read(c);
+
+        int max = a;
+
+        if (max < b) {
+            max = b;
+        }
+
+        if (max < c) {
+            max = c;
+        }
+
+        write("Max is: ");
+        write(max);
+    \end{minted}
+    \end{tcolorbox}
+
+    \begin{tcolorbox}[
+        standard jigsaw,
+        title=\textbf{ERR\_P1. Compute the maximum of 3 numbers (with 2 errors)},
+        colframe=red,
+        coltitle=black,
+        opacityback=0]
+    \begin{minted}{c}
+        // Error 1: read puts input in the given variable
+        int a = read();
+        int b; read(b);
+        int c; read(c);
+
+        // Error 2: max is not initialized yet
+        int max = max + a; 
+
+        if (max < b) {
+            max = b;
+        }
+
+        if (max < c) {
+            max = c;
+        }
+
+        write("Max is: ");
+        write(max);
+    \end{minted}
+    \end{tcolorbox}
+
+    \begin{tcolorbox}[
+        standard jigsaw,
+        title=P2. Check if a number is prime,
+        opacityback=0]
+    \begin{minted}{c}
+        int n;
+        read(n);
+
+        string prime_message = "Number is prime!"
+        string not_prime_message = "Number is NOT prime!"
+
+        if (n == 2 || n == 3) {
+            write(prime_message);
+
+            return;
+        }
+
+        if (n <= 1 || n % 2 == 0 || n % 3 == 0) {
+            write(not_prime_message);
+        
+            return;
+        } 
+        
+        for (int i = 5; i * i <= n; i += 6) {
+            if (n % i == 0 || n % (i + 2) == 0) {
+                write(not_prime_message);
+
+                return;
+            }
+        }
+
+        write(prime_message);
+    \end{minted}
+    \end{tcolorbox}
+
+    \begin{tcolorbox}[
+        standard jigsaw,
+        title=P3. Compute the sum of $n$ elements,
+        opacityback=0]
+    \begin{minted}{c}
+        int n;
+        read(n);
+
+        int sum = 0;
+        int x;
+        for (int i = 0; i < n; i++) {
+            read(x);
+            sum = sum + x;
+        }
+
+        write(sum);
+    \end{minted}
+    \end{tcolorbox}
+
+    \vspace{2em}
+\end{document}
