@@ -1,0 +1,30 @@
+; Lexic for the UniC language (rules are described using EBNF)
+
+a. Special symbols, representing:
+    - operators:    + - * % / = < <= = >=
+    - separators:   [ ] { } ( ) : ; space
+    - reserved words:
+        + 'char', 'int' 
+        + 'struct'
+        + 'if', 'else', 'while'
+        + 'read', 'write'
+
+b. Identifiers: 
+    - A sequence of letters and digits of at most 255 characters,
+    such that the first character is a letter; the rule is:
+        + identifier    = letter | letter, {letter}, {digit};
+
+        + letter        = "A" | "B" | ... | "Z";
+        + digit         = "0" | "1" | ... | "9";
+
+c. Constants
+    1. Integer (int_const)
+        + int_const     = '+', no | '-', no | no;
+
+        + int           = digit, {int};
+
+    2. Character (char_const)
+        + character     = letter | digit;
+
+    3. String (string_const)
+        + string        = character | string, character;

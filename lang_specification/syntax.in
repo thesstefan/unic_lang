@@ -1,0 +1,112 @@
+; Syntax rules for the UniC language using EBNF
+
+program                 = decl_list
+                        | compound_stmt
+                        | program, decl_list
+                        | program, compound_stmt
+                        ;
+decl_list               = decl
+                        | decl_list, decl
+                        ;
+decl                    = type_spec, init_declarator, ';'
+                        | type_spec, ';'
+                        ;
+type_spec               = 'int' 
+                        | 'char'
+                        | struct_spec
+                        ;
+struct_spec             = struct_type, id, '{', struct_decl_list, '}'
+                        | struct_type, id
+                        ;
+struct_type             = 'struct'
+                        ;
+struct_decl_list        = struct_decl
+                        | struct_decl_list, struct_decl
+                        ;
+struct_decl             = type_spec, init_declarator, ';'
+                        ;
+init_declarator         = declarator
+                        | declarator, '=', initializer
+                        ;
+initializer             = exp
+                        | '{', initializer_list, '}'
+                        ;
+declarator              = id
+                        | id, '[', ']
+                        | id, '[', int_const, ']
+                        ;
+stmt                    = exp_stmt
+                        | compound_stmt
+                        | conditional_stmt
+                        | iteration_stmt
+                        | io_stmt
+                        | return_stmt
+                        ;
+return_stmt             = 'return', ';'
+                        ;
+exp_stmt                = exp, ';'
+                        | ';'
+                        ;
+compound_stmt           = '{', stmt_list, '}
+                        | '{', '}'
+                        ;
+stmt_list               = stmt
+                        | stmt_list, stmt
+                        ;
+conditional_stmt        = 'if', '(', exp, ')', stmt
+                        | 'if', '(', exp, ')', stmt, 'else', stmt
+                        ;
+iteration_stmt          = 'while', '(', exp, ')', stmt
+                        ;
+io_stmt                 = ('read' | 'write'), '(', identifier, ')'
+                        | 'write', '(', const_exp, ')' 
+                        ;
+exp                     = assignment_exp
+                        ;
+assignment_exp          = logical_or_exp
+                        | unary_exp, '=', assignment_exp
+                        ;
+const_exp               = logical_or_exp
+                        ;
+logical_or_exp          = logical_and_exp
+                        | logical_or_exp, '||', logical_and_exp
+                        ;
+logical_and_exp         = equality_exp 
+                        | logical_and_exp, '&&', equality_exp
+                        ;
+equality_exp            = relational_exp
+                        | equality_exp, '==', relational_exp
+                        | equality_exp, '!=', relational_exp
+                        ;
+relational_exp          = add_exp
+                        | relational_exp, '<', add_exp
+                        | relational_exp, '>', add_exp
+                        | relational_exp, '<=', add_exp
+                        | relational_exp, '<=', add_exp
+                        ;
+add_exp                 = mul_exp
+                        | add_exp, '+', mul_exp
+                        | add_exp, '-', mul_exp
+                        ;
+mul_exp                 = unary_exp 
+                        | mul_exp, '*', unary_exp
+                        | mul_exp, '/', unary_exp
+                        | mul_exp, '%', unary_exp
+                        ;
+unary_exp               = postfix_exp
+                        | unary_op, postfix_exp
+                        ;
+unary_op                = '+' | '-' | '!'
+                        ;
+postfix_exp             = primary_exp
+                        | postfix_exp, '[', exp, ']'
+                        ;
+primary_exp             = identifier
+                        | const
+                        | string
+                        | '(', exp, ')'
+                        ;
+const                   = int_const
+                        | char_const
+                        | string_const
+                        ;
