@@ -1,7 +1,8 @@
 import random
+import attrs
 
 class _BSTNode(object):
-    """ Private storage class for the SymbolTable. """
+    """ Private storage class for the BSTree. """
 
     def __init__(self, key, value):
         self.key = key
@@ -13,7 +14,7 @@ class _BSTNode(object):
         return str(self.key) + ": " + str(self.value) 
 
 
-class SymbolTable(object):
+class BSTree(object):
     """ 
     A binary search tree implementation of the Symbol Table.  This class
     implements a subset of the functionality provided by the built-in
@@ -187,6 +188,7 @@ class SymbolTable(object):
         else:
             return self._bstMinimum(subtree.left)
 
+
 class _InorderBSTIterator(object):
     # Inorder Iterator class.  Traversal state is maintained between
     # calls using a stack.
@@ -227,42 +229,3 @@ class _InorderBSTIterator(object):
                 curNode = curNode.left
 
         return key
-           
-
-def main():
-    """ Run some quick tests on the SymbolTable by comparing its behavior
-    to a Python dictionary. """
-
-    symbolTable = SymbolTable()
-    pyDict = {}
-    
-    # Add the same set of key value pairs to a python dictionary and 
-    # a SymbolTable. 
-    for _ in range(20): 
-        randChar = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[random.randint(0,25)]
-        randInt = random.randint(0,100)
-        symbolTable[randInt] = randChar
-        pyDict[randInt] = randChar
-
-    # Make sure that symbolTable has the correct length.
-    assert len(pyDict) == len(symbolTable)
-    print(symbolTable)
-
-    # Make sure all elements in pyDict are also in symbolTable
-    for key in pyDict:
-        assert key in symbolTable
-        assert pyDict[key] == symbolTable[key]
-
-    # Make sure all elements in symbolTable are also in pyDict.
-    for key in symbolTable:
-        assert key in pyDict
-
-    # Remove all items from symbolTable
-    for key in pyDict:
-        symbolTable.pop(key)
-
-    # Make sure that the size is 0 after all items are removed. 
-    assert len(symbolTable) == 0, "size is: " + str(len(symbolTable))
-
-if __name__ == "__main__":
-    main()

@@ -1,0 +1,16 @@
+int 123123as_3 = read();
+int b; read(b);
+int c; read(c);
+
+int max = a;
+
+if (max # b) {
+    max = b;
+}
+
+if (max < c) {
+    max = c;
+}
+
+write("Max is ");
+write(max);

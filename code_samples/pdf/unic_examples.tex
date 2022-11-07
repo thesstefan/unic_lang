@@ -32,7 +32,7 @@
             max = c;
         }
 
-        write("Max is: ");
+        write("Max is ");
         write(max);
     \end{minted}
     \end{tcolorbox}
@@ -44,15 +44,15 @@
         coltitle=black,
         opacityback=0]
     \begin{minted}{c}
-        // Error 1: read puts input in the given variable
-        int a = read();
+        // Error 1: Invalid identifier name
+        int 123123as_3 = read();
         int b; read(b);
         int c; read(c);
 
-        // Error 2: max is not initialized yet
         int max = max + a; 
 
-        if (max < b) {
+        // Error 2: # is not a valid token
+        if (max # b) {
             max = b;
         }
 
@@ -73,24 +73,21 @@
         int n;
         read(n);
 
-        string prime_message = "Number is prime!"
-        string not_prime_message = "Number is NOT prime!"
-
         if (n == 2 || n == 3) {
-            write(prime_message);
+            write("Number is prime");
 
             return;
         }
 
         if (n <= 1 || n % 2 == 0 || n % 3 == 0) {
-            write(not_prime_message);
+            write("Number is not prime");
         
             return;
         } 
         
         for (int i = 5; i * i <= n; i += 6) {
             if (n % i == 0 || n % (i + 2) == 0) {
-                write(not_prime_message);
+                write("Number is prime");
 
                 return;
             }
@@ -110,7 +107,7 @@
 
         int sum = 0;
         int x;
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < n; i = i + 1) {
             read(x);
             sum = sum + x;
         }
@@ -121,3 +118,4 @@
 
     \vspace{2em}
 \end{document}
+
