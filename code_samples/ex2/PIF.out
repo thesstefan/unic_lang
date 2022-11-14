@@ -1,29 +1,27 @@
 === PROGRAM INTERNAL FORM ===
 
 int -> -1
-IDENTIFIER -> 0
+IDENTIFIER -> (10, 0)
 ; -> -1
 read -> -1
 ( -> -1
-IDENTIFIER -> 0
+IDENTIFIER -> (10, 0)
 ) -> -1
 ; -> -1
 if -> -1
 ( -> -1
-IDENTIFIER -> 0
-= -> -1
-= -> -1
-INT_CONSTANT -> 1
+IDENTIFIER -> (10, 0)
+== -> -1
+INT_CONSTANT -> (50, 0)
 || -> -1
-IDENTIFIER -> 0
-= -> -1
-= -> -1
-INT_CONSTANT -> 2
+IDENTIFIER -> (10, 0)
+== -> -1
+INT_CONSTANT -> (51, 0)
 ) -> -1
 { -> -1
 write -> -1
 ( -> -1
-STR_CONSTANT -> 3
+STR_CONSTANT -> (77, 0)
 ) -> -1
 ; -> -1
 return -> -1
@@ -31,78 +29,72 @@ return -> -1
 } -> -1
 if -> -1
 ( -> -1
-IDENTIFIER -> 0
-< -> -1
-= -> -1
-INT_CONSTANT -> 4
+IDENTIFIER -> (10, 0)
+<= -> -1
+INT_CONSTANT -> (49, 0)
 || -> -1
-IDENTIFIER -> 0
+IDENTIFIER -> (10, 0)
 % -> -1
-INT_CONSTANT -> 1
-= -> -1
-= -> -1
-INT_CONSTANT -> 5
+INT_CONSTANT -> (50, 0)
+== -> -1
+INT_CONSTANT -> (48, 0)
 || -> -1
-IDENTIFIER -> 0
+IDENTIFIER -> (10, 0)
 % -> -1
-INT_CONSTANT -> 2
-= -> -1
-= -> -1
-INT_CONSTANT -> 5
+INT_CONSTANT -> (51, 0)
+== -> -1
+INT_CONSTANT -> (48, 0)
 ) -> -1
 { -> -1
 write -> -1
 ( -> -1
-STR_CONSTANT -> 6
+STR_CONSTANT -> (46, 0)
 ) -> -1
 ; -> -1
 return -> -1
 ; -> -1
 } -> -1
-IDENTIFIER -> 7
+for -> -1
 ( -> -1
 int -> -1
-IDENTIFIER -> 8
+IDENTIFIER -> (5, 0)
 = -> -1
-INT_CONSTANT -> 9
+INT_CONSTANT -> (53, 0)
 ; -> -1
-IDENTIFIER -> 8
+IDENTIFIER -> (5, 0)
 * -> -1
-IDENTIFIER -> 8
-< -> -1
-= -> -1
-IDENTIFIER -> 0
+IDENTIFIER -> (5, 0)
+<= -> -1
+IDENTIFIER -> (10, 0)
 ; -> -1
-IDENTIFIER -> 8
+IDENTIFIER -> (5, 0)
 + -> -1
 = -> -1
-INT_CONSTANT -> 10
+INT_CONSTANT -> (54, 0)
 ) -> -1
 { -> -1
 if -> -1
 ( -> -1
-IDENTIFIER -> 0
+IDENTIFIER -> (10, 0)
 % -> -1
-IDENTIFIER -> 8
-= -> -1
-= -> -1
-INT_CONSTANT -> 5
+IDENTIFIER -> (5, 0)
+== -> -1
+INT_CONSTANT -> (48, 0)
 || -> -1
-IDENTIFIER -> 0
+IDENTIFIER -> (10, 0)
 % -> -1
 ( -> -1
-IDENTIFIER -> 8
+IDENTIFIER -> (5, 0)
 + -> -1
-INT_CONSTANT -> 1
+INT_CONSTANT -> (50, 0)
 ) -> -1
-= -> -1
-= -> -1
-INT_CONSTANT -> 5
+== -> -1
+INT_CONSTANT -> (48, 0)
 ) -> -1
 { -> -1
 write -> -1
 ( -> -1
-STR_CONSTANT -> 6
+STR_CONSTANT -> (46, 0)
 ) -> -1
 ; -> -1
 return -> -1
@@ -111,6 +103,6 @@ return -> -1
 } -> -1
 write -> -1
 ( -> -1
-STR_CONSTANT -> 3
+STR_CONSTANT -> (77, 0)
 ) -> -1
 ; -> -1

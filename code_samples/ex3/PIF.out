@@ -1,51 +1,53 @@
 === PROGRAM INTERNAL FORM ===
 
 int -> -1
-IDENTIFIER -> 0
+IDENTIFIER -> (10, 0)
 ; -> -1
 read -> -1
 ( -> -1
-IDENTIFIER -> 0
+IDENTIFIER -> (10, 0)
 ) -> -1
 ; -> -1
 int -> -1
-IDENTIFIER -> 1
+IDENTIFIER -> (41, 0)
 = -> -1
-INT_CONSTANT -> 2
+INT_CONSTANT -> (48, 0)
 ; -> -1
 int -> -1
-IDENTIFIER -> 3
+IDENTIFIER -> (20, 0)
 ; -> -1
-IDENTIFIER -> 4
+for -> -1
 ( -> -1
 int -> -1
-IDENTIFIER -> 5
+IDENTIFIER -> (5, 0)
 = -> -1
-INT_CONSTANT -> 2
+INT_CONSTANT -> (48, 0)
 ; -> -1
-IDENTIFIER -> 5
+IDENTIFIER -> (5, 0)
 < -> -1
-IDENTIFIER -> 0
+IDENTIFIER -> (10, 0)
 ; -> -1
-IDENTIFIER -> 5
+IDENTIFIER -> (5, 0)
+= -> -1
+IDENTIFIER -> (5, 0)
 + -> -1
-+ -> -1
+INT_CONSTANT -> (49, 0)
 ) -> -1
 { -> -1
 read -> -1
 ( -> -1
-IDENTIFIER -> 3
+IDENTIFIER -> (20, 0)
 ) -> -1
 ; -> -1
-IDENTIFIER -> 1
+IDENTIFIER -> (41, 0)
 = -> -1
-IDENTIFIER -> 1
+IDENTIFIER -> (41, 0)
 + -> -1
-IDENTIFIER -> 3
+IDENTIFIER -> (20, 0)
 ; -> -1
 } -> -1
 write -> -1
 ( -> -1
-IDENTIFIER -> 1
+IDENTIFIER -> (41, 0)
 ) -> -1
 ; -> -1

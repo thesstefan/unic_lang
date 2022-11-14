@@ -1,13 +1,15 @@
 import argparse
 from unic.runners import run_lexer
 
+
 def arg_parser():
     parser = argparse.ArgumentParser(prog='unic', description='UniC Compiler')
-    command_parsers = parser.add_subparsers(help='Command help', dest='command', required=True)
+    command_parsers = parser.add_subparsers(help='Command help',
+                                            dest='command', required=True)
 
-    lexer_parser = command_parsers.add_parser('lexer', 
+    lexer_parser = command_parsers.add_parser('lexer',
                                               help='lexer help')
-    lexer_parser.add_argument('--token_json', default='token.json', 
+    lexer_parser.add_argument('--token_json', default='token.json',
                               help='Path to JSON containing tokens split by category')
     lexer_parser.add_argument('--pif_out', default='PIF.out', 
                               help='Path to file where PIF should be written')
@@ -17,6 +19,7 @@ def arg_parser():
                               help='Path to the UniC file to be parsed')
 
     return parser
+
 
 def main():
     args = vars(arg_parser().parse_args())
