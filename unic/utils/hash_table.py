@@ -1,7 +1,7 @@
 import attrs
 import itertools
 
-from typing import Any, List, Tuple, Optional, Iterator 
+from typing import Any, List, Tuple, Optional, Iterator
 from unic.utils.str_map import StrMap, StrMapPosition
 
 

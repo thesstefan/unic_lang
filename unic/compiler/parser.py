@@ -2,6 +2,7 @@
 
 from unic.compiler.symbol_table import SymbolTable
 from unic.compiler.program_internal_form import ProgramInternalForm
+from unic.automata.state import FiniteAutomata
 
 import json
 import attrs
@@ -30,6 +31,10 @@ class Parser:
     token_json_path: str
     _tokens_by_type: Dict[str, List[str]] = attrs.field(
             default=attrs.Factory(dict))
+    use_automata: bool = True
+
+    id_automata: FiniteAutomata = FiniteAutomata()
+    int_automata: FiniteAutomata = FiniteAutomata()
 
     def _populate_tokens(self, token_json_path: str) -> None:
         with open(token_json_path) as token_json_file:
@@ -37,6 +42,27 @@ class Parser:
 
     def __attrs_post_init__(self) -> None:
         self._populate_tokens(self.token_json_path)
+
+        if self.use_automata:
+            self.id_automata = FiniteAutomata()
+            self.id_automata.read_from_file('FA_id.in')
+
+            self.int_automata = FiniteAutomata()
+            self.int_automata.read_from_file('FA_int.in')
+
+    def is_identifier(self, token: str) -> bool:
+        if self.use_automata:
+            return self.id_automata.accept(token)
+
+        identifier_pattern = '[_a-zA-Z][_a-zA-Z0-9]*'
+        return bool(re.fullmatch(identifier_pattern, token))
+
+    def is_number(self, token: str) -> bool:
+        if self.use_automata:
+            return self.int_automata.accept(token)
+
+        number_pattern = '[1-9][0-9]*|0'
+        return bool(re.fullmatch(number_pattern, token))
 
     def _token_type(self, token: str) -> TokenType:
         if token in self._tokens_by_type['keyword']:
@@ -48,17 +74,15 @@ class Parser:
         if token in self._tokens_by_type['delimiter']:
             return TokenType.DELIMITER
 
-        identifier_pattern = '[_a-zA-Z][_a-zA-Z0-9]*'
-        if re.fullmatch(identifier_pattern, token):
+        if self.is_identifier(token):
             return TokenType.IDENTIFIER
+
+        if self.is_number(token):
+            return TokenType.INT_CONSTANT
 
         string_literal_pattern = '\"(\\.|[^\"])*\"'
         if re.fullmatch(string_literal_pattern, token):
             return TokenType.STR_CONSTANT
-
-        number_pattern = '[1-9][0-9]*|0'
-        if re.fullmatch(number_pattern, token):
-            return TokenType.INT_CONSTANT
 
         return TokenType.UNKNOWN
 
