@@ -2,7 +2,6 @@ import attrs
 
 from typing import Dict, Set, List
 from collections import defaultdict
-import os
 
 
 @attrs.define
@@ -45,9 +44,7 @@ class FiniteAutomata:
         self.states[source].add_transition(destination, literal)
 
     def read_from_file(self, file_path: str):
-        dirname = os.path.dirname(__file__)
-
-        with open(os.path.join(dirname, file_path)) as file:
+        with open(file_path) as file:
             for literal in map(str.strip, file.readline().split(',')):
                 self.alphabet.add(literal)
 

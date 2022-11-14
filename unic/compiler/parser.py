@@ -2,7 +2,7 @@
 
 from unic.compiler.symbol_table import SymbolTable
 from unic.compiler.program_internal_form import ProgramInternalForm
-from unic.automata.state import FiniteAutomata
+from unic.automata.finite_automata import FiniteAutomata
 
 import json
 import attrs
@@ -10,6 +10,12 @@ import re
 import itertools
 from enum import Enum
 from typing import List, Dict
+import os
+
+IDENTIFIER_FINITE_AUTOMATA_PATH = os.path.join(os.path.dirname(__file__),
+                                               '../automata/FA_id.in')
+NUMBER_FINITE_AUTOMATA_PATH = os.path.join(os.path.dirname(__file__),
+                                           '../automata/FA_int.in')
 
 TokenType = Enum('TokenType',
                  ['KEYWORD', 'OPERATOR', 'DELIMITER', 'IDENTIFIER',
@@ -29,9 +35,9 @@ class Parser:
     :ivar token_json_path: Path to file containing UniC tokens by category.
     """
     token_json_path: str
+    use_automata_matching: bool
     _tokens_by_type: Dict[str, List[str]] = attrs.field(
             default=attrs.Factory(dict))
-    use_automata: bool = True
 
     id_automata: FiniteAutomata = FiniteAutomata()
     int_automata: FiniteAutomata = FiniteAutomata()
@@ -43,22 +49,22 @@ class Parser:
     def __attrs_post_init__(self) -> None:
         self._populate_tokens(self.token_json_path)
 
-        if self.use_automata:
+        if self.use_automata_matching:
             self.id_automata = FiniteAutomata()
-            self.id_automata.read_from_file('FA_id.in')
+            self.id_automata.read_from_file(IDENTIFIER_FINITE_AUTOMATA_PATH)
 
             self.int_automata = FiniteAutomata()
-            self.int_automata.read_from_file('FA_int.in')
+            self.int_automata.read_from_file(NUMBER_FINITE_AUTOMATA_PATH)
 
     def is_identifier(self, token: str) -> bool:
-        if self.use_automata:
+        if self.use_automata_matching:
             return self.id_automata.accept(token)
 
         identifier_pattern = '[_a-zA-Z][_a-zA-Z0-9]*'
         return bool(re.fullmatch(identifier_pattern, token))
 
     def is_number(self, token: str) -> bool:
-        if self.use_automata:
+        if self.use_automata_matching:
             return self.int_automata.accept(token)
 
         number_pattern = '[1-9][0-9]*|0'

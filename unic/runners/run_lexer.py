@@ -1,11 +1,13 @@
 from unic.compiler.parser import Parser, ParserError
 import sys
 
+
 def run_lexer(input_path: str,
               token_json_path: str,
+              use_automata_matching: bool,
               symbol_table_out_path: str,
               pif_out_path: str) -> None:
-    parser = Parser(token_json_path)
+    parser = Parser(token_json_path, use_automata_matching)
 
     try:
         symbol_table, pif = parser.parse_file(input_path)
