@@ -1,0 +1,93 @@
+%option noyywrap
+%{
+	#include <stdio.h>
+    #include "y.tab.h"
+	int lines = 0;
+%}
+
+NZERODIGIT [1-9]
+DIGIT      [0-9]
+LETTER     [A-Za-z]
+CHARACTER  ['](LETTER|DIGIT)[']
+STRING     ["][A-Za-z0-9_]+["]
+IDENTIFIER [A-Za-z]|[_A-Za-z][_A-Za-z0-9]+
+
+%%
+
+{DIGIT}|{NZERODIGIT}{DIGIT}*|"-"{NZERODIGIT}{DIGIT}*					{return INTEGER;}
+{CHARACTER}										{return CHAR;}
+{STRING}										{return STR;}
+"let"											{return LET;}
+"int"											{return INT;}
+"string"										{return STRING;}
+"char"											{return CHAR;}
+"vec"											{return VEC;}
+"input"											{return INPUT;}
+"output"										{return OUTPUT;}
+"if"											{return IF;}
+"else"											{return ELSE;}
+"while"											{return WHILE;}
+"return"										{return RETURN;}
+"("											{return OPEN_ROUND_BRACKET;}
+")"											{return CLOSED_ROUND_BRACKET;}
+"["											{return OPEN_SQUARE_BRACKET;}
+"]"											{return CLOSED_SQUARE_BRACKET;}
+"{"											{return OPEN_BRACE;}
+"}"											{return CLOSED_BRACE;}
+";"											{return SEMICOLON;}
+":"											{return COLON;}
+","											{return COMMA;}							
+"+"											{return PLUS;}
+"-"											{return MINUS;}
+"*"											{return MULTIPLY;}
+"/"											{return DIVIDE;}
+"%"											{return MOD;}
+"<="											{return RELATION_OP;}
+"=="											{return RELATION_OP;}
+">"											{return RELATION_OP;}
+">="											{return RELATION_OP;}
+"!="											{return RELATION_OP;}
+"="											{return ASSIGNMENT_OP;}
+"<"											{return RELATION_OP;}
+"!"											{return RELATION_OP;}
+"and"											{return RELATION_OP;}
+"or"											{return RELATION_OP;}			
+{IDENTIFIER}										{return ID;}
+
+[\n]+											{++lines;}
+[ \t]+											{}
+
+[0-9]{IDENTIFIER}									{ printf("Illegal identifier at line %d: %s\n", lines, yytext); return -1; }
+.											{ printf("Illegal symbol at line %d: %s\n", lines, yytext); return -1; }
+
+%%
+
+int main(int argc, char **argv)
+{
+    ++argv;
+    --argc; 
+    
+    if ( argc > 0 ) {
+        yyin = fopen( argv[0], "r" ); 
+    }
+    else {
+        yyin = stdin; 
+    }
+
+    int token;
+    int isOk = 1;
+
+    token = yylex();
+
+    while( token ) {
+        if(token == -1) {
+	    isOk = 0;
+	}
+        token = yylex();
+    }
+
+    if ( isOk ) {
+	printf("SUCCESS\n");
+    }
+    return 0;
+}

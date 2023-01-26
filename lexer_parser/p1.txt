@@ -1,0 +1,21 @@
+let a: int;
+input(a);
+
+let b: int;
+input(b);
+
+max ()
+
+let c: int;
+input(c);
+
+let max: int;
+max = a;
+
+if ( b > a ) {
+    max = b;
+}
+
+if ( c > m ) {
+    max = c;
+}
